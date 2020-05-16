@@ -9,16 +9,16 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
 use yurisi\Task\Sendtask;
-use yurisi\Command\johoCommand;
+use yurisi\Command\infoCommand;
 
 class main extends PluginBase implements Listener {
 
-   public $plugin= "PISB";
+   public $plugin= "ScoreBoardStatus";
 
    public function onEnable() {
 	$this->getServer()->getPluginManager()->registerEvents($this, $this);
-	$this->getScheduler()->scheduleRepeatingTask(new Sendtask($this), 5);
-	$this->getServer()->getCommandMap()->register("joho", new johoCommand($this));
+	$this->getScheduler()->scheduleRepeatingTask(new Sendtask($this), 40);
+	$this->getServer()->getCommandMap()->register("info", new infoCommand($this));
 	$this->getLogger()->info("§b".$this->plugin."を開きました");
    }
 

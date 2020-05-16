@@ -36,12 +36,13 @@ class Sendtask extends Task implements PacketData{
 			if($this->Main->isOn($player)) {
 				$this->RemoveData($player);
 				$this->setupData($player);
-				$this->sendData($player,"§e所持金: ".EconomyAPI::getInstance()->getMonetaryUnit().EconomyAPI::getInstance()->myMoney($name),1);
-				$this->sendData($player,"§b座標: ".$player->getfloorX().",".$player->getfloorY().",".$player->getfloorZ(),2);
-				$this->sendData($player,"§bワールド: ".$player->getLevel()->getName(),3);
-				$this->sendData($player,"§c現在時刻: ".date("G時i分s秒"),4);
-				$this->sendData($player,"§6持ってるid: ".$player->getInventory()->getItemInHand()->getId().":".$player->getInventory()->getItemInHand()->getDamage(),5);
-				$this->sendData($player,"§6オンライン人数: ".count($player->getServer()->getOnlinePlayers())."/".$player->getServer()->getMaxPlayers(),6);
+				$this->sendData($player,"§a時刻 §7>§f ".date("G時i分"),1);
+				$this->sendData($player,"§b座標 §7>§f §cX§f".$player->getfloorX()." §aY§f".$player->getfloorY()." §bZ§f".$player->getfloorZ(),2);
+				$this->sendData($player,"§bワールド §7>§f ".$player->getLevel()->getName(),3);
+				$this->sendData($player,"§e所持金 §7>§f ".EconomyAPI::getInstance()->myMoney($name)."§6K§eG",4);
+				$this->sendData($player,"§cアイテムID §7>§f ".$player->getInventory()->getItemInHand()->getId().":".$player->getInventory()->getItemInHand()->getDamage(),5);
+				$this->sendData($player,"§cオンライン人数 §7>§f ".count($player->getServer()->getOnlinePlayers())."/".$player->getServer()->getMaxPlayers(),6);
+				$this->sendData($player,"§7@".$name,7);
 			}else{
 				$this->RemoveData($player);
 			}
@@ -53,7 +54,7 @@ class Sendtask extends Task implements PacketData{
 		$pk = new SetDisplayObjectivePacket();
 		$pk->displaySlot = PacketData::D_S;
 		$pk->objectiveName = PacketData::D_S;
-		$pk->displayName = "§a".$player->getName();
+		$pk->displayName = "§6Komugi§aNET";
 		$pk->criteriaName = PacketData::C_N;
 		$pk->sortOrder = 0;
 		$player->sendDataPacket($pk);
